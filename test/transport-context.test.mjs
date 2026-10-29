@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {MideaClient} from '../src/midea.mjs';
+test('native fetch is called without the client as its this context',async()=>{const c=new MideaClient({account:'dummy@example.test',password:'dummy',target:{}},{fetcher:async function(){assert.equal(this,undefined);return Response.json({code:0,data:{ok:true}});}});assert.deepEqual(await c.request('/v1/multicloud/platform/user/route',{}),{ok:true});});

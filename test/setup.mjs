@@ -1,0 +1,1 @@
+Object.assign(process.env,{FIREBASE_PROJECT_ID:'example-project',FIREBASE_OWNER_UID:'example-owner-uid',FIREBASE_OWNER_EMAIL:'owner@example.test',MIDEA_APP_KEY:'dummy-app-key',MIDEA_IOT_KEY:'dummy-iot-key',MIDEA_HMAC_KEY:'dummy-hmac-key',MIDEA_FIXED_KEY:'0123456789abcdef',MIDEA_FIXED_IV:'fedcba9876543210'});
