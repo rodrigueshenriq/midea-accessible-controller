@@ -1,0 +1,36 @@
+name: Qualidade e segurança
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+      - run: python3 scripts/scan-public.py
+      - name: Gitleaks verificado por checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          curl --fail --location --silent --show-error -o gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          curl --fail --location --silent --show-error -o checksums.txt https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_checksums.txt
+          expected=$(awk '$2 == "gitleaks_8.30.1_linux_x64.tar.gz" {print $1}' checksums.txt)
+          test -n "$expected"
+          echo "$expected  gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+          cd "$GITHUB_WORKSPACE"
+          "$RUNNER_TEMP/gitleaks" git . --redact --no-banner
