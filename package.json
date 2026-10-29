@@ -1,0 +1,19 @@
+{
+  "name": "midea-accessible-controller",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import ./test/setup.mjs --test test/*.test.mjs",
+    "dev": "wrangler dev",
+    "check": "wrangler deploy --dry-run",
+    "test:runtime": "node --import ./test/setup.mjs scripts/test-runtime.mjs",
+    "scan": "python scripts/scan-public.py",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.154.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

@@ -1,0 +1,15 @@
+title = "Public portfolio security scan"
+[extend]
+useDefault = true
+[[allowlists]]
+description = "Reviewed synthetic AES key in isolated test fixtures; never a manufacturer key"
+condition = "AND"
+paths = ['''test[\\/](setup\.mjs|midea\.test\.mjs|notification-recovery\.test\.mjs)$''']
+regexTarget = "secret"
+regexes = ['''^0123456789abcdef$''']
+[[allowlists]]
+description = "Independently generated hash of dummy password and dummy protocol key"
+condition = "AND"
+paths = ['''test[\\/]crypto-vectors\.json$''']
+regexTarget = "secret"
+regexes = ['''^b4802c33d742e7c232979eb5602bf6589980d13bb7d36117c9b1d733b36e8874$''']

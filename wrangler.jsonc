@@ -1,0 +1,35 @@
+{
+  "name": "midea-accessible-controller",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-10-27",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "accessible-washer-example",
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "vars": {
+    "PUBLIC_ORIGIN": "http://localhost:8787",
+    "CONTROL_ENABLED": "false",
+    "FIREBASE_PROJECT_ID": "example-project",
+    "FIREBASE_OWNER_UID": "example-owner-uid",
+    "FIREBASE_OWNER_EMAIL": "owner@example.test",
+    "FIREBASE_WEB_API_KEY": "EXAMPLE_FIREBASE_WEB_API_KEY"
+  },
+  "observability": {
+    "enabled": false
+  }
+}
